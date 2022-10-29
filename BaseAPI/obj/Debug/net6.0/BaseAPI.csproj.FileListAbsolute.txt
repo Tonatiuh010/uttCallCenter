@@ -1,0 +1,17 @@
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\BaseAPI.deps.json
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\BaseAPI.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\BaseAPI.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\DataService.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\Engine.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\DataService.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\bin\Debug\net6.0\Engine.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.csproj.AssemblyReference.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.AssemblyInfoInputs.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.AssemblyInfo.cs
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.csproj.CoreCompileInputs.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.csproj.CopyComplete
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\refint\BaseAPI.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\BaseAPI.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\BaseAPI\obj\Debug\net6.0\ref\BaseAPI.dll

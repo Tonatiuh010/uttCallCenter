@@ -1,0 +1,12 @@
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\bin\Release\net6.0\DataService.deps.json
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\bin\Release\net6.0\DataService.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\bin\Release\net6.0\DataService.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.csproj.AssemblyReference.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.AssemblyInfoInputs.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.AssemblyInfo.cs
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.csproj.CoreCompileInputs.cache
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\refint\DataService.dll
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\DataService.pdb
+C:\Users\Tonatiuh Lopez\Documents\Projects\ControlHint\src\solutions\DataService\obj\Release\net6.0\ref\DataService.dll
