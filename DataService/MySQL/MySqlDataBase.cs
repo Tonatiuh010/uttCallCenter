@@ -1,30 +1,37 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using DataService.Interfaces;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using static DataService.Interfaces.IDatabase;
+using D = DataService.Services.DataServiceDelegates;
 
 namespace DataService.MySQL
 {
-    public class MySqlDataBase
+    public class MySqlDataBase : Database
     {
+
+        // Properties         
+        public override IDbConnection Connection { get; set; } = new MySqlConnection();
+        public override string? ConnectionString { get; set; }
         
-        // Delegates
-        public delegate void TransactionCallback();
-        public delegate void DataException(Exception e, string customMsg = "");
-        public delegate void ReaderAction(IDataReader reader);
+        public override void OpenConnection() => Connection.Open();
 
-        // Properties
-        public static DataException? OnException { get; set; }
-        public MySqlConnection Connection { get; set; } = new MySqlConnection();        
-        private string? ConnectionString { get; set; }
+        public override void CreateConnection() {
 
-        // Constructor
-        public MySqlDataBase(string? connString)
-        {
             try
             {
-                ConnectionString = connString;
-                CreateConnection();                    
+
+                if (string.IsNullOrEmpty(ConnectionString))
+                {
+                    throw new Exception("MySQL Connection string is empty");
+                }
+
+                var conn = new MySqlConnection(ConnectionString);
+                conn.StateChange += OnStateChange;
+                Connection = conn;
+
             }
             catch (Exception ex)
             {
@@ -48,22 +55,10 @@ namespace DataService.MySQL
                         OnException(ex, "Exception creating connection...");
                     }
                 }
-            }
+            }           
         }
 
-        public void OpenConnection() => OpenConnection(this);
-
-        public void CreateConnection() {
-            if (string.IsNullOrEmpty(ConnectionString))
-            {
-                throw new Exception("MySQL Connection string is empty");
-            }
-
-            Connection = new (ConnectionString);
-            Connection.StateChange += OnStateChange;
-        }
-
-        public void CloseConnection()
+        public override void CloseConnection()
         {          
             if (Connection != null && Connection.State == ConnectionState.Open)
             {
@@ -72,89 +67,34 @@ namespace DataService.MySQL
             }            
         }
 
-        public MySqlCommand CreateCommand(string cmdText, CommandType type)
-        => CreateCommand(cmdText, Connection, type);
+        public override IDbCommand CreateCommand(string cmdText, CommandType type) => CreateCommand(cmdText, Connection, type);
 
         private void OnStateChange(object obj, StateChangeEventArgs args)
         {
             if (args.CurrentState == ConnectionState.Closed)
             {
-                //OpenConnection();
-                //Handling Event
+                
             }
         }
-
-        // Static Methods
-        public static MySqlCommand CreateCommand(string cmdText, MySqlConnection conn, CommandType type) 
-        => new (cmdText, conn)
+        
+        public IDbCommand CreateCommand(string cmdText, IDbConnection conn, CommandType type) => new MySqlCommand (cmdText, (MySqlConnection)conn)
         {
             CommandType = type
         };
 
-        public static IDataParameter CreateParameter(string name, object? value, MySqlDbType type, bool isNullable = true) => new MySqlParameter(name, value)
+        public override IDataParameter CreateParameter(string name, object? value, DbType type, bool isNullable = true) => new MySqlParameter(name, value)
         {
-            Direction = ParameterDirection.Input,
-            MySqlDbType = type,
-            IsNullable = isNullable
+            Direction = ParameterDirection.Input,            
+            IsNullable = isNullable,
+            DbType = type,
         };
 
-        public static IDataParameter CreateParameterOut(string name, MySqlDbType type) => new MySqlParameter()
+        public override IDataParameter CreateParameterOut(string name, DbType type) => new MySqlParameter()
         {
             ParameterName = name,
             Direction = ParameterDirection.Output,
-            MySqlDbType = type
+            DbType = type,
         };
-
-        private static void OpenConnection(MySqlDataBase db)
-        {
-            db.Connection.Open();
-        }
-
-        public static void ReaderBlock(MySqlCommand cmd, ReaderAction action)
-        {
-            using var reader = cmd.ExecuteReader();
-            action(reader);
-            reader.Close();
-        }
-
-        public static void NonQueryBlock(MySqlCommand cmd, Action action)
-        {
-            cmd.ExecuteNonQuery();
-            action();           
-        }
-
-        public static void TransactionBlock(
-            MySqlDataBase db,
-            TransactionCallback action,
-            DataException onException,
-            Action? onProcess = null
-        )
-        {
-            MySqlConnection conn = db.Connection;
-            bool isTxnSuccess;
-            
-            if(db.Connection.State == ConnectionState.Closed)
-            {
-                db.OpenConnection();
-            }
-
-            try
-            {                
-                action();                
-                isTxnSuccess = true;
-            }
-            catch (Exception e)
-            {                                
-                onException(e);
-                isTxnSuccess = false;
-            }
-
-            if (isTxnSuccess)
-                onProcess?.Invoke();
-
-            db.Connection.Dispose();
-            db.Connection.Close();
-        }
 
     }
 }

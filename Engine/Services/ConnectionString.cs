@@ -14,7 +14,7 @@ namespace Engine.Services
     {
         #region Static Methods 
         private static ConnectionString _Instance { get; set; } = new (() => string.Empty);
-        private static List<ConnectionString> ConnectionStrings { get; set; } = new();        
+        private static List<ConnectionString> ConnectionStrings { get; set; } = new();
 
         public static ConnectionString Instance => _Instance;
         public static ConnectionString? InstanceByName(string name) => FindConnection(name);
@@ -60,7 +60,7 @@ namespace Engine.Services
 
         private ConnectionString(IConnectionString connection)
         {
-            if (string.IsNullOrEmpty(connection.Name))
+            if (!string.IsNullOrEmpty(connection.Name))
             {
                 Name = connection.Name;
             }

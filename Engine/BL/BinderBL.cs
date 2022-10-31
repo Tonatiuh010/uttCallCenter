@@ -8,6 +8,9 @@ using Engine.BL;
 using Engine.DAL;
 using Engine.Services;
 using DataService.MySQL;
+using DataService.Services;
+using DataService.Interfaces;
+using DataService;
 
 namespace Engine.BL
 {
@@ -15,12 +18,12 @@ namespace Engine.BL
     {
         public static void Start()
         {
-            BaseDAL.OnDALError = ExceptionManager.CallbackException;
+            BaseDAL<MySqlDataBase>.OnDALError = ExceptionManager.CallbackException;
         }
 
-        public static void SetDalError(MySqlDataBase.DataException onConnectionError)
+        public static void SetDalError(DataServiceDelegates.DataException onConnectionError)
         {
-            MySqlDataBase.OnException = onConnectionError;
+            IDatabase.OnException = onConnectionError;            
         }
     }
 }

@@ -24,5 +24,6 @@ namespace Engine.Constants {
         /* Connection Strings */
         public const string ACCESS_DB = "DB_ACCESS";
         public const string HINT_DB = "DB_HINT";
+        public const string CALL_CENTER_DB = "CALL_CENTER_DB";
     }
 }

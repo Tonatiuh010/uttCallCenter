@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataService;
 using DataService.MySQL;
 using Engine.BO;
 using Engine.Constants;
@@ -12,14 +13,19 @@ using D = Engine.BL.Delegates;
 
 namespace Engine.DAL
 {
-    public abstract class BaseDAL : MySqlDataBase
+    public abstract class BaseDAL <T> where T : Database, new()
     {
-        protected static readonly Validate Validate = Validate.Instance;
+        protected static readonly Validate Validate = Validate.Instance;       
         public static D.CallbackExceptionMsg? OnDALError { get; set; }
 
-        protected IConnectionString? ConnString { get; set; }
+        protected T DB { get; set; }        
 
-        protected BaseDAL(IConnectionString? conn) : base(conn?.ConnectionString) => ConnString = conn;                     
+        protected BaseDAL(IConnectionString? conn)
+        {
+            DB = new T();
+            DB.ConnectionString = conn?.GetConnection();
+            DB.CreateConnection();            
+        }
 
         protected void SetResultInsert(ResultInsert result, BaseBO bo) 
             => result.InsertDetails = bo.IsValid() ? new InsertStatus(bo) : new InsertStatus(GetLastId(), bo);        
@@ -27,10 +33,10 @@ namespace Engine.DAL
         protected int GetLastId()
         {
             int id = 0;
-            TransactionBlock(this, () => {
+            DB.TransactionBlock( () => {
 
-                using var cmd = CreateCommand("SELECT LAST_INSERT_ID()", CommandType.Text);
-                var result = cmd.ExecuteScalar().ToString();
+                using var cmd = DB.CreateCommand("SELECT LAST_INSERT_ID()", CommandType.Text);
+                var result = cmd?.ExecuteScalar()?.ToString();
 
                 if (result != null)
                 {

@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Compile Remove="BL\Actuators\StudentsBL.cs" />
     <Compile Remove="Interfaces\DataCollector\IContactFamilyCollector.cs" />
     <Compile Remove="Interfaces\DataCollector\IGroupStatsCollector.cs" />
     <Compile Remove="Interfaces\DataCollector\IGroupStudentCollector.cs" />
