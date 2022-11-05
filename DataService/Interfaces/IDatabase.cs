@@ -75,9 +75,5 @@ namespace DataService.Interfaces
             db.Connection.Close();
         }
 
-        void CreateConnection(SqlCommand command);
-        void CreateConnection(SqlCommand command);
-        void CreateConnection(SqlCommand command);
-        void CreateConnection(SqlCommand command);
     }
 }

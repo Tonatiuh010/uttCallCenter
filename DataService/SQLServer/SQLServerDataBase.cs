@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,24 +12,18 @@ namespace DataService.SQLServer
 {
     public class SQLServerDataBase : Database
     {
-        private string connectionString;
-        private SqlCommand command;
-
+        
         public override IDbConnection Connection { get; set; } = new SqlConnection();
         public override string? ConnectionString { get; set; }
 
         public override void OpenConnection() => Connection.Open();
 
-        public override void CreateConnection(SqlCommand command)
-        {
-            DataTable table = new DataTable();
-            SqlConnection connection = new SqlConnection(connectionString);
+        public override void CreateConnection()
+        {            
+            Connection = new SqlConnection(ConnectionString);
             try
             {
-                connection.Open();
-                command.Connection = connection;
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(table);
+                Connection.Open();                
             }
             catch (SqlException ex)
             {
@@ -74,12 +70,24 @@ namespace DataService.SQLServer
 
         public override IDataParameter CreateParameter(string name, object? value, DbType type, bool isNullable = true)
         {
-            throw new NotImplementedException();
+            return new SqlParameter()
+            {                
+                ParameterName = name,
+                Value = value,
+                DbType = type,
+                IsNullable = isNullable,
+                Direction = ParameterDirection.Input
+            };
         }
 
         public override IDataParameter CreateParameterOut(string name, DbType type)
         {
-            throw new NotImplementedException();
+            return new SqlParameter()
+            {
+                ParameterName = name,                
+                DbType = type,
+                Direction = ParameterDirection.Output
+            };
         }
     }
 }

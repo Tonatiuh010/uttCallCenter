@@ -10,10 +10,11 @@ using Engine.Services;
 using Engine.BO.CallCenter;
 using System.Data;
 using System.Linq.Expressions;
+using DataService.SQLServer;
 
 namespace Engine.DAL
 {
-    public class CallCenterDAL : BaseDAL<MySqlDataBase>
+    public class CallCenterDAL : BaseDAL<SQLServerDataBase>
     {
         public delegate void DALCallback(CallCenterDAL dal);
         private static ConnectionString? _ConnectionString => ConnectionString.InstanceByName(C.CALL_CENTER_DB);
