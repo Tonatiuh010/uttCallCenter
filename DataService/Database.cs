@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using D = DataService.Services.DataServiceDelegates;
 using static DataService.Interfaces.IDatabase;
+using System.Data.SqlClient;
 
 namespace DataService
 {
@@ -21,6 +22,7 @@ namespace DataService
         public abstract IDbCommand CreateCommand(string cmdText, CommandType type);
 
         public abstract void CreateConnection();
+
 
         public abstract IDataParameter CreateParameter(string name, object? value, DbType type, bool isNullable = true);
 

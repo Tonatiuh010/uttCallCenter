@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using D = DataService.Services.DataServiceDelegates;
 using DataService.MySQL;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 
 namespace DataService.Interfaces
 {
@@ -74,5 +75,9 @@ namespace DataService.Interfaces
             db.Connection.Close();
         }
 
+        void CreateConnection(SqlCommand command);
+        void CreateConnection(SqlCommand command);
+        void CreateConnection(SqlCommand command);
+        void CreateConnection(SqlCommand command);
     }
 }

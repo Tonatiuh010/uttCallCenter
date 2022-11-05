@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tonatiuh Lopez\\Documents\\Projects\\CallCenterDemo\\DataService\\DataService.csproj": {}
+    "C:\\xampp\\htdocs\\uttCallCenter\\DataService\\DataService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tonatiuh Lopez\\Documents\\Projects\\CallCenterDemo\\DataService\\DataService.csproj": {
+    "C:\\xampp\\htdocs\\uttCallCenter\\DataService\\DataService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tonatiuh Lopez\\Documents\\Projects\\CallCenterDemo\\DataService\\DataService.csproj",
+        "projectUniqueName": "C:\\xampp\\htdocs\\uttCallCenter\\DataService\\DataService.csproj",
         "projectName": "DataService",
-        "projectPath": "C:\\Users\\Tonatiuh Lopez\\Documents\\Projects\\CallCenterDemo\\DataService\\DataService.csproj",
-        "packagesPath": "C:\\Users\\Tonatiuh Lopez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tonatiuh Lopez\\Documents\\Projects\\CallCenterDemo\\DataService\\obj\\",
+        "projectPath": "C:\\xampp\\htdocs\\uttCallCenter\\DataService\\DataService.csproj",
+        "packagesPath": "C:\\Users\\nayel\\.nuget\\packages\\",
+        "outputPath": "C:\\xampp\\htdocs\\uttCallCenter\\DataService\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Tonatiuh Lopez\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\nayel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,6 +47,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.1.10, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.4, )"
             }
           },
           "imports": [
