@@ -23,15 +23,19 @@ namespace CallCenterDemo.Controllers
         [HttpPost]
         public Result SetCall(dynamic obj) => RequestResponse(() => 
         {
-            var jObj = JsonObject.Parse(obj.ToString());
+            JsonObject jObj = JsonObject.Parse(obj.ToString());
 
-            return C.OK;
+            var phone = ParseProperty<string>.GetValue("phone", jObj, OnMissingProperty);
+
+            if (string.IsNullOrEmpty(phone))
+                throw new Exception("Propiedad Phone no se encuentra en el request...");
+
+            return bl.SetCall(phone);
         });
 
         [HttpPost("/end")]
         public Result EndCall() => RequestResponse(() =>
         {
-
             return C.OK;
         });
 

@@ -20,6 +20,8 @@ namespace Engine.BL
         }
         public Call? GetCall(int id) => GetCalls(id).FirstOrDefault();
 
+        public int SetCall(string phone) => Dal.SetCall(phone);
+
         public List<Agent> GetAgents(int? id = null) => Dal.GetAgents(id);
         public Agent? GetAgent(int id) => GetAgents(id).FirstOrDefault();
 

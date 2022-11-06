@@ -167,5 +167,30 @@ namespace Engine.DAL
 
             return model;
         }
+
+        public int SetCall(string phone)
+        {
+            int status = 0;
+
+            DB.TransactionBlock(() => {
+                using var cmd = DB.CreateCommand(SQL.spReceiveCall, CommandType.StoredProcedure);
+
+                IDataParameter result = DB.CreateParameterOut("status", DbType.Int32);
+
+                cmd.Parameters.Add(DB.CreateParameter("phoneNumber", phone, DbType.String));
+                cmd.Parameters.Add(result);
+
+                cmd.ExecuteNonQuery();                
+
+                if (result.Value != null)
+                {
+                    status = (int)result.Value;
+                }
+
+            }, (ex, msg) => SetExceptionResult("CallCenterDAL.SetCall", msg, ex));
+
+
+            return status;
+        }
     }
 }
