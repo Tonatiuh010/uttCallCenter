@@ -33,7 +33,7 @@ namespace CallCenterDemo.Controllers
             return bl.SetCall(phone);
         });
 
-        [HttpPost("/end")]
+        [HttpPost("end")]
         public Result EndCall(dynamic obj) => RequestResponse(() =>
         {
             JsonObject jObj = JsonObject.Parse(obj.ToString());
