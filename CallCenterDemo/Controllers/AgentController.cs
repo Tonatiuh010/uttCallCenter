@@ -4,6 +4,7 @@ using Engine.BO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Security;
+using System.Text.Json.Nodes;
 
 namespace CallCenterDemo.Controllers
 {
@@ -20,6 +21,17 @@ namespace CallCenterDemo.Controllers
         public Result GetAgent(int id) => RequestResponse(() => bl.GetAgent(id));
 
         [HttpPost]
-        public object SetAgent() => null;
+        public object SetAgent(dynamic obj) => RequestResponse(() =>
+        {
+            JsonObject jObj = JsonObject.Parse(obj.ToString());
+
+            var agentId = ParseProperty<int>.GetValue("agentId", jObj, OnMissingProperty);
+
+            var agentPin = ParseProperty<int>.GetValue("agentPin", jObj, OnMissingProperty);
+
+            var stationId = ParseProperty<int>.GetValue("stationId", jObj, OnMissingProperty);
+
+            return bl.SetAgent(agentId, agentPin, stationId);
+        });
     }
 }
