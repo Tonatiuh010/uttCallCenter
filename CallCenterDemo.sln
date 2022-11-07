@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenterDemo", "CallCenterDemo\CallCenterDemo.csproj", "{B58E04FD-ADCC-4178-A528-B336764EF6E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallCenterDemo", "CallCenterDemo\CallCenterDemo.csproj", "{B58E04FD-ADCC-4178-A528-B336764EF6E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataService", "DataService\DataService.csproj", "{844B7E68-BD2C-4129-B71D-331A097AD46E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseAPI", "BaseAPI\BaseAPI.csproj", "{D6685060-32E6-4255-9A7D-376A260F0BEF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine", "Engine\Engine.csproj", "{7C8735E5-D872-4AD3-BB0E-FFBE756EF7E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonProcess", "DemonProcess\DemonProcess.csproj", "{094AACA1-E23C-419E-B11A-F5D97884BFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7C8735E5-D872-4AD3-BB0E-FFBE756EF7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C8735E5-D872-4AD3-BB0E-FFBE756EF7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C8735E5-D872-4AD3-BB0E-FFBE756EF7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094AACA1-E23C-419E-B11A-F5D97884BFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094AACA1-E23C-419E-B11A-F5D97884BFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094AACA1-E23C-419E-B11A-F5D97884BFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094AACA1-E23C-419E-B11A-F5D97884BFFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
