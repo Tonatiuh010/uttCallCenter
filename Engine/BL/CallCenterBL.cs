@@ -22,6 +22,10 @@ namespace Engine.BL
 
         public int SetCall(string phone) => Dal.SetCall(phone);
 
+        public int EndCall(int callId, int statusEndId) => Dal.EndCall(callId,statusEndId);
+
+        public int SetAgent(int agentId, int agentPin, int stationId) => Dal.SetAgent(agentId, agentPin, stationId);
+
         public List<Agent> GetAgents(int? id = null) => Dal.GetAgents(id);
         public Agent? GetAgent(int id) => GetAgents(id).FirstOrDefault();
 

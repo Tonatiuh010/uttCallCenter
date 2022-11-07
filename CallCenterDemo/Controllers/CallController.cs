@@ -34,9 +34,15 @@ namespace CallCenterDemo.Controllers
         });
 
         [HttpPost("/end")]
-        public Result EndCall() => RequestResponse(() =>
+        public Result EndCall(dynamic obj) => RequestResponse(() =>
         {
-            return C.OK;
+            JsonObject jObj = JsonObject.Parse(obj.ToString());
+
+            var callId = ParseProperty<int>.GetValue("callId", jObj, OnMissingProperty);
+
+            var statusEndId = ParseProperty<int>.GetValue("statusEndId", jObj, OnMissingProperty);
+
+            return bl.EndCall(callId, statusEndId);
         });
 
     }

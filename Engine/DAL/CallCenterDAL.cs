@@ -11,6 +11,7 @@ using Engine.BO.CallCenter;
 using System.Data;
 using System.Linq.Expressions;
 using DataService.SQLServer;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace Engine.DAL
 {
@@ -21,13 +22,13 @@ namespace Engine.DAL
         public static CallCenterDAL Instance => new();
         private CallCenterDAL() : base(_ConnectionString) { }
 
-        public List<Agent> GetAgents(int ? id)
+        public List<Agent> GetAgents(int? id)
         {
-            List<Agent> model = new ();
+            List<Agent> model = new();
 
             DB.TransactionBlock(() =>
             {
-                using var cmd = DB.CreateCommand($"SELECT * FROM AGENTS{ (id != null ? $" WHERE ID = {id}" : "") }", CommandType.Text);
+                using var cmd = DB.CreateCommand($"SELECT * FROM AGENTS{(id != null ? $" WHERE ID = {id}" : "")}", CommandType.Text);
                 using var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -49,7 +50,7 @@ namespace Engine.DAL
 
         public List<Call> GetCalls(int? id)
         {
-            List<Call> model = new ();
+            List<Call> model = new();
 
             DB.TransactionBlock(() =>
             {
@@ -81,7 +82,7 @@ namespace Engine.DAL
 
         public List<Session> GetSessions(int? id)
         {
-            List<Session> model = new ();
+            List<Session> model = new();
 
             DB.TransactionBlock(() =>
             {
@@ -95,15 +96,15 @@ namespace Engine.DAL
                         Id = Validate.getDefaultIntIfDBNull(reader["id"]),
                         LoginDate = Validate.getDefaultDateIfDBNull(reader["dateTimeLogin"]),
                         LogoutDate = Validate.getDefaultDateIfDBNull(reader["dateTimeLogout"]),
-                        Agent = new ()
+                        Agent = new()
                         {
                             Id = Validate.getDefaultIntIfDBNull(reader["idAgent"]),
                         },
-                        CurrentCall = new ()
+                        CurrentCall = new()
                         {
                             Id = Validate.getDefaultIntIfDBNull(reader["idCurrentCall"])
                         },
-                        IsActive = Validate.getDefaultBoolIfDBNull(reader["active"]),                       
+                        IsActive = Validate.getDefaultBoolIfDBNull(reader["active"]),
                     });
                 }
                 reader.Close();
@@ -115,7 +116,7 @@ namespace Engine.DAL
 
         public List<SessionLog> GetSessionLogs(int? id)
         {
-            List<SessionLog> model = new ();
+            List<SessionLog> model = new();
 
             DB.TransactionBlock(() =>
             {
@@ -127,7 +128,7 @@ namespace Engine.DAL
                     model.Add(new()
                     {
                         Id = Validate.getDefaultIntIfDBNull(reader["id"]),
-                        Session = new ()
+                        Session = new()
                         {
                             Id = Validate.getDefaultIntIfDBNull(reader["idSession"])
                         },
@@ -144,11 +145,11 @@ namespace Engine.DAL
 
         public List<Station> GetStations(int? id)
         {
-            List<Station> model = new ();
+            List<Station> model = new();
 
             DB.TransactionBlock(() =>
             {
-                using var cmd = DB.CreateCommand($"SELECT * FROM STATIONS{(id != null ? $" WHERE ID = {id}" : "")}", CommandType.Text);                
+                using var cmd = DB.CreateCommand($"SELECT * FROM STATIONS{(id != null ? $" WHERE ID = {id}" : "")}", CommandType.Text);
                 using var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -159,7 +160,7 @@ namespace Engine.DAL
                         Row = Validate.getDefaultIntIfDBNull(reader["rowNumber"]),
                         Desk = Validate.getDefaultIntIfDBNull(reader["deskNumber"]),
                         IPAddress = Validate.getDefaultStringIfDBNull(reader["ipAddress"]),
-                        IsActive = Validate.getDefaultBoolIfDBNull(reader["active"])                        
+                        IsActive = Validate.getDefaultBoolIfDBNull(reader["active"])
                     });
                 }
                 reader.Close();
@@ -180,7 +181,7 @@ namespace Engine.DAL
                 cmd.Parameters.Add(DB.CreateParameter("phoneNumber", phone, DbType.String));
                 cmd.Parameters.Add(result);
 
-                cmd.ExecuteNonQuery();                
+                cmd.ExecuteNonQuery();
 
                 if (result.Value != null)
                 {
@@ -192,5 +193,66 @@ namespace Engine.DAL
 
             return status;
         }
+
+        public int SetAgent(int agentId, int agentPin, int stationId)
+        {
+            int status = 0;
+
+            DB.TransactionBlock(() => {
+
+                using var cmd = DB.CreateCommand(SQL.spLoginAgent, CommandType.StoredProcedure);
+
+                IDataParameter result = DB.CreateParameterOut("status", DbType.Int32);
+
+                cmd.Parameters.Add(DB.CreateParameter("agentId", agentId, DbType.String));
+
+                cmd.Parameters.Add(DB.CreateParameter("agentPin", agentPin, DbType.String));
+
+                cmd.Parameters.Add(DB.CreateParameter("stationId", stationId, DbType.String));
+
+                cmd.Parameters.Add(result);
+
+                cmd.ExecuteNonQuery();
+
+                if (result.Value != null)
+                {
+                    status = (int)result.Value;
+                }
+
+            }, (ex, msg) => SetExceptionResult("CallCenterDAL.SetLoginAgent", msg, ex));
+
+
+            return status;
+        }
+
+
+        public int EndCall(int callId, int statusEndId)
+        {
+            int status = 0;
+
+            DB.TransactionBlock(() => {
+                using var cmd = DB.CreateCommand(SQL.spEndCall, CommandType.StoredProcedure);
+
+                IDataParameter result = DB.CreateParameterOut("status", DbType.Int32);
+
+                cmd.Parameters.Add(DB.CreateParameter("callId", callId, DbType.String));
+
+                cmd.Parameters.Add(DB.CreateParameter("statusEndId", statusEndId, DbType.String));
+
+                cmd.Parameters.Add(result);
+
+                cmd.ExecuteNonQuery();
+
+                if (result.Value != null)
+                {
+                    status = (int)result.Value;
+                }
+
+            }, (ex, msg) => SetExceptionResult("CallCenterDAL.EndCall", msg, ex));
+
+
+            return status;
+        }
+
     }
 }
