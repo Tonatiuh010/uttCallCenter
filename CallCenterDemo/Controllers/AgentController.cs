@@ -20,6 +20,9 @@ namespace CallCenterDemo.Controllers
         [HttpGet("{id:int}")]
         public Result GetAgent(int id) => RequestResponse(() => bl.GetAgent(id));
 
+        [HttpGet("stations")]
+        public Result GetStations() => RequestResponse(() => bl.GetStations());
+
         [HttpPost]
         public object SetAgent(dynamic obj) => RequestResponse(() =>
         {

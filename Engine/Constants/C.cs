@@ -12,6 +12,12 @@ namespace Engine.Constants {
         public const string PENDING = "PENDING";
         public const string ROLLABACK = "ROLLBACK";
 
+        public const string STARTUP = "STARTUP";
+        public const string LOAD = "LOAD";
+        public const string AGENT_THREAD = "AGENT_THREAD";
+        public const string CALL_THREAD = "CALL_THREAD";
+        public const string SYSTEM = "SYSTEM";
+
         public const string ENABLED = "ENABLED";
         public const string DISABLED = "DISABLED";
 
